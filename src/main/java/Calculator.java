@@ -9,13 +9,11 @@ public class Calculator {
         if (numbers.equals("")){
             return result;
         }
-        for (int number : splitAndParse(numbers)) {
+        ArrayList<Integer> intList = splitAndParse((numbers));
+        intList = checkOnNegatives(intList);
+        for (int number : intList) {
             if (number<=1000) {
-                if (number<0) {
-                    throw new IllegalArgumentException("negatieve cijfers zijn niet toegestaan");
-                } else {
                     result += number;
-                }
             }
         }
         return result;
@@ -28,6 +26,16 @@ public class Calculator {
             listOfInts.add(Integer.parseInt(number));
         }
         return listOfInts;
+    }
+
+    public ArrayList<Integer> checkOnNegatives(ArrayList<Integer> list) {
+        for(int i=0; i < list.size()-1;i++) {
+            if (list.get(i)<0) {
+                list.remove(i);
+                throw new IllegalArgumentException("negatieve cijfers zijn niet toegestaan");
+            }
+        }
+        return list;
     }
 
 }
