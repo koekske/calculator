@@ -9,7 +9,8 @@ public class Calculator {
         if (numbers.equals("")){
             return result;
         }
-        ArrayList<Integer> intList = splitAndParse((numbers));
+        String[] arrOfStrings = split((numbers));
+        ArrayList<Integer> intList = parse(arrOfStrings);
         intList = checkOnNegatives(intList);
         for (int number : intList) {
             if (number<=1000) {
@@ -19,10 +20,14 @@ public class Calculator {
         return result;
     }
 
-    public ArrayList<Integer> splitAndParse(String numbersString) {
-        ArrayList<Integer> listOfInts = new ArrayList<Integer>();
+    public String[] split(String numbersString) {
         String[] arrOfString = numbersString.split(",|\\;|\\||\\\n|/" , 0);
-        for (String number : arrOfString) {
+        return arrOfString;
+    }
+
+    public ArrayList<Integer> parse(String[] arrOfStrings) {
+        ArrayList<Integer> listOfInts = new ArrayList<Integer>();
+        for (String number : arrOfStrings) {
             listOfInts.add(Integer.parseInt(number));
         }
         return listOfInts;

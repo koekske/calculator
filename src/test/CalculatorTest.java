@@ -73,15 +73,28 @@ public class CalculatorTest {
     }
 
     @Test
-    @DisplayName("test split en parse")
-    void testOfSplitAndParse() {
-        ArrayList<Integer> list = calculator.splitAndParse("1;2|1000\n1001/5,6");
-        assertEquals(1, list.get(0));
-        assertEquals(2, list.get(1));
-        assertEquals(1000, list.get(2));
-        assertEquals(1001, list.get(3));
-        assertEquals(5, list.get(4));
-        assertEquals(6, list.get(5));
+    @DisplayName("test split")
+    void testOfSplit() {
+        String[] list = calculator.split("1;2|1000\n1001/5,6");
+        assertEquals("1", list[0]);
+        assertEquals("2", list[1]);
+        assertEquals("1000", list[2]);
+        assertEquals("1001", list[3]);
+        assertEquals("5", list[4]);
+        assertEquals("6", list[5]);
+    }
+
+    @Test
+    @DisplayName("test parse")
+    void testOfParse() {
+        String[] list = calculator.split("1;2|1000\n1001/5,6");
+        ArrayList<Integer> intList = calculator.parse(list);
+        assertEquals(1, intList.get(0));
+        assertEquals(2, intList.get(1));
+        assertEquals(1000, intList.get(2));
+        assertEquals(1001, intList.get(3));
+        assertEquals(5, intList.get(4));
+        assertEquals(6, intList.get(5));
     }
 
     @Test
